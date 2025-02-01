@@ -15,7 +15,22 @@ env:
   CONTAINER_NAME: version
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.filter.outputs.backend }}
+    steps:
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          backend:
+            - '!(.github)/**'
+
   deploy:
+    needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+
     runs-on: ubuntu-latest
 
     steps:
