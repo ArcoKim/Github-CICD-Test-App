@@ -13,7 +13,7 @@ public class MainController {
     @GetMapping("/version")
     public String version(Model model) {
         model.addAttribute("name", "KimJeongTae");
-        model.addAttribute("version", "0.0.1");
+        model.addAttribute("version", "1.0.0");
         return "version";
     }
 
