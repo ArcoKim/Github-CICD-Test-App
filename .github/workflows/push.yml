@@ -20,12 +20,14 @@ jobs:
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
     steps:
-    - uses: dorny/paths-filter@v3
-      id: filter
-      with:
-        filters: |
-          backend:
-            - '!(.github)/**'
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            backend:
+              - '!(.github)/**'
 
   deploy:
     needs: changes
